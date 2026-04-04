@@ -1,14 +1,24 @@
-Investment Strategy Game
+# Bank Liquidity Simulation
 
-Interactive game where the player allocates capital across 
-different asset classes every 5 years.
+A Python project I built to learn more about how banks manage liquidity risk.
 
-Assets included:
-- S&P500
-- NASDAQ
-- Gold
-- Oil
-- US10Y Treasury
+The program simulates how a bank's liquidity buffer changes over 90 days,
+using Monte Carlo methods to model random daily deposits and withdrawals.
+I wanted to see how many scenarios end up below the minimum buffer threshold
+and what the best and worst case paths look like.
 
-The simulation module computes all possible strategies 
-and identifies the best and worst performing paths.
+## What it does
+- Loads deposit data from a CSV file
+- Runs 100 Monte Carlo simulations of daily cash flows
+- Tracks the liquidity buffer over time for each scenario
+- Highlights the best and worst performing paths on a chart
+- Shows the minimum required buffer (20% of total deposits)
+
+## How to run
+```bash
+pip install -r requirements.txt
+python main.py
+```
+
+## Tech
+Python, NumPy, Pandas, Matplotlib
