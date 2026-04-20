@@ -9,7 +9,7 @@ Python project that lets you test your investment decisions against historical m
 **Simulation** — brute-force all possible strategies and find the best and worst outcome.
 
 ## Assets
-S&P 500, NASDAQ, Gold, Oil, US 10Y Treasury
+S&P 500, NASDAQ, Gold, Oil, Real Estate
 
 ## Usage
 ```bash
