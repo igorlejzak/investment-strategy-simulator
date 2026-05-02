@@ -17,22 +17,35 @@ def run_game(market):
 
         if i > 0:
             print("\n[ HISTORICAL DATA ]")
-            print(market.df.iloc[:i].to_string())
+            history = market.df.iloc[:i].copy()
+            history_pct = history.applymap(lambda x: f"{x*100:+.1f}%")
+            print(history_pct.to_string())
         else:
             print("\n[ NO HISTORICAL DATA YET - FIRST ROUND ]")
 
         assets = list(market.get_returns(year).keys())
+        returns = market.get_returns(year)
+
         print(f"\nChoose your asset for {year}-{year + 5}:")
-        print("Options: " + ", ".join(assets))
+        for idx, asset in enumerate(assets, 1):
+            print(f"  {idx}. {asset}")
 
-        choice = ""
-        while choice not in assets:
-            choice = input("Your choice: ").strip()
+        choice_idx = None
+        while choice_idx is None:
+            try:
+                val = int(input("Your choice (number): ").strip())
+                if 1 <= val <= len(assets):
+                    choice_idx = val - 1
+                else:
+                    print(f"Enter a number between 1 and {len(assets)}")
+            except ValueError:
+                print(f"Enter a number between 1 and {len(assets)}")
 
-        ret = market.get_returns(year)[choice]
+        choice = assets[choice_idx]
+        ret = returns[choice]
         capital = calculate_capital(capital, ret)
 
-        print(f"\n>>> {choice} returned {ret * 100:.2f}% this period\n")
+        print(f"\n>>> {choice} returned {ret * 100:+.1f}% this period\n")
 
     print("#" * 50)
     print("GAME OVER")
